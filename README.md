@@ -8,8 +8,9 @@ cd canvas_animation_fun
 npm install
 npm start
 
+
+```
+
 or:
 
 <https://rob-robinson.github.io/canvas_animation_fun>
-
-```

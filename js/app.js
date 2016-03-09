@@ -118,7 +118,8 @@ function init() {
     canvas.height = canvasHeight;
     canvas.id = "gameboard";
 
-    //canvas.style.background = "url(img/gameboard.jpg)";
+    canvas.style.background = "url(img/gameboard.jpg)";
+    canvas.style['background-size'] = "100% 100%";
 
     document.body.appendChild(canvas);
 
@@ -177,12 +178,8 @@ var player = {
         s.src = "img/home_page_squirrel2.png";
         context.drawImage(s, this.x, this.y, 80, 60);
 
-        // friction? :
-        // this.dx = this.dx * .998;
-        // this.dy = this.dy * .998;
+        document.getElementById("score").innerHTML = "dx : " + this.dx+ " dy : " + this.dy;
 
-        // if(this.dx < .005){this.dx=0}
-        // if(this.dy < .005){this.dy=0}
 
 
         if (newX >= canvasWidth ) {
@@ -196,6 +193,30 @@ var player = {
         if (newY >= canvasHeight ) {
             newY = 0;
         }
+
+
+
+        // friction? :
+        var frictionLimit = .25;
+        var friction = .998;
+
+        
+        
+
+        if( Math.abs(this.dx) < frictionLimit) { 
+            this.dx=0;
+        } else {
+            this.dx = this.dx * friction;
+        }
+
+        if( Math.abs(this.dy) < frictionLimit) {
+            this.dy=0;
+        } else {
+            this.dy = this.dy * friction;
+        }
+
+
+
 
         // scoring hacks...
         if (newY < 80) {

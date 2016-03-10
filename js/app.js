@@ -168,87 +168,93 @@ var player = {
     draw: function () {
         'use strict';
 
-        var s = new Image();
-        var newX = this.x += this.dx/3;
-        var newY = this.y += this.dy/3;
-        var tempScore, score;
+        // only do expensive drawing when the player has x or y direction
+        if(this.dx !=0 || this.dy !=0){
 
-        context.clearRect(0, 0, canvasWidth, canvasHeight);
+            var s = new Image();
+            var newX = this.x += this.dx/3;
+            var newY = this.y += this.dy/3;
+            var tempScore, score;
 
-        s.src = "img/home_page_squirrel2.png";
-        context.drawImage(s, this.x, this.y, 80, 60);
+            context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-        document.getElementById("score").innerHTML = "dx : " + this.dx+ " dy : " + this.dy;
+            s.src = "img/home_page_squirrel2.png";
+            context.drawImage(s, this.x, this.y, 80, 60);
 
-
-
-        if (newX >= canvasWidth ) {
-            //newX = 0;
-            this.dx = this.dx * -1;
-        }  else
-        if (newX < 0) {
-            //newX = canvasWidth;
-            this.dx = this.dx * -1;
-        }
-        if (newY >= canvasHeight ) {
-            newY = 0;
-        }
+            document.getElementById("score").innerHTML = "dx : " + this.dx.toFixed(2)+ " dy : " + this.dy.toFixed(2);
 
 
 
-        // friction? :
-        var frictionLimit = .25;
-        var friction = .998;
-
-        
-        
-
-        if( Math.abs(this.dx) < frictionLimit) { 
-            this.dx=0;
-        } else {
-            this.dx = this.dx * friction;
-        }
-
-        if( Math.abs(this.dy) < frictionLimit) {
-            this.dy=0;
-        } else {
-            this.dy = this.dy * friction;
-        }
-
-
-
-
-        // scoring hacks...
-        if (newY < 80) {
-            newY = 550;
-            newX = 550;
-            this.dy = 0;
-            this.dx = 0;
-
-            tempScore = Math.abs(432 - this.x);
-            score = 0;
-
-            if (tempScore < 2.5) {
-                score = 10;
-            } else if (tempScore < 15) {
-                score = 9;
-            } else if (tempScore < 25) {
-                score = 8;
-            } else if (tempScore < 35) {
-                score = 7;
-            } else if (tempScore < 45) {
-                score = 6;
-            } else if (tempScore < 55) {
-                score = 5;
+            if (newX >= canvasWidth ) {
+                //newX = 0;
+                this.dx = this.dx * -1;
+            }  else
+            if (newX < 0) {
+                //newX = canvasWidth;
+                this.dx = this.dx * -1;
+            }
+            if (newY >= canvasHeight ) {
+                newY = 0;
+            }
+            if (newX >= canvasWidth ) {
+                newX = 1;
             }
 
-            document.getElementById("score").innerHTML = "Landed on : " + parseInt(this.x) + " TempScore : " + parseInt(tempScore) + " Score : " + score;
-            // perfect is 432:
-            // score is Math.abs(432-this.x)
-        }
 
-        this.x = newX;
-        this.y = newY;
+            // friction? :
+            var frictionLimit = .25;
+            var friction = .998;
+
+            
+            
+
+            if( Math.abs(this.dx) < frictionLimit) { 
+                this.dx=0;
+            } else {
+                this.dx = this.dx * friction;
+            }
+
+            if( Math.abs(this.dy) < frictionLimit) {
+                this.dy=0;
+            } else {
+                this.dy = this.dy * friction;
+            }
+
+
+
+
+            // // scoring hacks...
+            // if (newY < 80) {
+            //     newY = 550;
+            //     newX = 550;
+            //     this.dy = 0;
+            //     this.dx = 0;
+
+            //     tempScore = Math.abs(432 - this.x);
+            //     score = 0;
+
+            //     if (tempScore < 2.5) {
+            //         score = 10;
+            //     } else if (tempScore < 15) {
+            //         score = 9;
+            //     } else if (tempScore < 25) {
+            //         score = 8;
+            //     } else if (tempScore < 35) {
+            //         score = 7;
+            //     } else if (tempScore < 45) {
+            //         score = 6;
+            //     } else if (tempScore < 55) {
+            //         score = 5;
+            //     }
+
+            //     document.getElementById("score").innerHTML = "Landed on : " + parseInt(this.x) + " TempScore : " + parseInt(tempScore) + " Score : " + score;
+            //     // perfect is 432:
+            //     // score is Math.abs(432-this.x)
+            // }
+
+            this.x = newX;
+            this.y = newY;
+        }
     } // end draw
 };
 

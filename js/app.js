@@ -83,28 +83,6 @@ function onMouseEnd(e) {
     player.dy = (clickY - releaseY) / 10;
 }
 
-function keyCheck(event) {
-    'use strict';
-
-    event.preventDefault();
-
-    var KeyID = event.keyCode;
-
-    if (KeyID === 39) {
-        //console.log('right');
-        player.dx = Math.abs(player.dx);
-    } else if (KeyID === 37) {
-        //console.log('left');
-        player.dx = Math.abs(player.dx) * -1;
-    } else if (KeyID === 38) {
-        //console.log('up');
-        player.dy = Math.abs(player.dy) * -1;
-    } else if (KeyID === 40) {
-        //console.log('down');
-        player.dy = Math.abs(player.dy);
-    }
-}
-
 // end event delegates
 
 function init() {
@@ -131,8 +109,6 @@ function init() {
     canvas.addEventListener('touchstart', onMouseStart, false);
     canvas.addEventListener('touchend', onMouseEnd, false);
 
-    document.addEventListener('keyup', keyCheck, false);
-
     context = canvas.getContext("2d");
 
 
@@ -144,18 +120,18 @@ function init() {
     }, 1 / FPS);
 }
 
-var c = [
-    {x:160,y:160},
-    {x:140,y:140},
-    {x:180,y:140},
-    {x:120,y:120},
-    {x:160,y:120},
-    {x:180,y:120},
-    {x:100,y:100},
-    {x:140,y:100},
-    {x:180,y:100},
-    {x:220,y:100}
-];
+// var c = [
+//     {x:160,y:160},
+//     {x:140,y:140},
+//     {x:180,y:140},
+//     {x:120,y:120},
+//     {x:160,y:120},
+//     {x:180,y:120},
+//     {x:100,y:100},
+//     {x:140,y:100},
+//     {x:180,y:100},
+//     {x:220,y:100}
+// ];
 
 var player = {
     color: "#00A",
